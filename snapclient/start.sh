@@ -1,3 +1,9 @@
 #!/usr/bin/env bash
 
-exec snapclient -h "$SNAPSERVER" --hostID "$DEVICE_NAME"
+echo "Start Avahi-daemon..."
+/usr/sbin/avahi-daemon -D
+echo "Started Avahi-daemon"
+
+echo "Start Snapclient..."
+exec snapclient --hostID "$DEVICE_NAME"
+echo "Started Snapclient"

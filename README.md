@@ -43,7 +43,7 @@ To run this project is as simple as deploying it to a balenaCloud application; n
 ### Customize device name
 
 By default, your device will be displayed as `balenaSound xxxx` when you search for Bluetooth devices.
-You can change this using `BLUETOOTH_DEVICE_NAME` environment variable that can be set in balena dashboard
+You can change this using `DEVICE_NAME` environment variable that can be set in balena dashboard
 (navigate to dashboard -> app -> device -> device variables).
 
 ![Setting the device name](images/device-name-config.png)

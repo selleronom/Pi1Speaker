@@ -3,7 +3,9 @@ FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine
 ENV INITSYSTEM on
 
 RUN install_packages \
-  snapcast 
+  snapcast \
+  avahi \
+  dbus
 
 COPY start.sh /usr/src/
 WORKDIR /usr/src/
