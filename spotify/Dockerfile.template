@@ -1,8 +1,12 @@
-FROM balenalib/%%BALENA_MACHINE_NAME%%:buster
+FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine:edge
 
-RUN install_packages apt-utils \
-  curl \
-  && curl -sL https://dtcooper.github.io/raspotify/install.sh | sh
+RUN apk add --update \
+--repository http://dl-cdn.alpinelinux.org/alpine/edge/community \
+ build-base alsa-lib-dev rust cargo make gcc busybox libgcc musl git \
+ && git clone https://github.com/librespot-org/librespot.git \
+ && cd librespot \
+ && cargo build --release --features alsa-backend \
+ && cp target/release/librespot /usr/bin/librespot
 
 COPY start.sh /usr/src/
 
