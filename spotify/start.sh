@@ -8,4 +8,4 @@ fi
 SYSTEM_OUTPUT_VOLUME="${SYSTEM_OUTPUT_VOLUME:-25}"
 
 # Start raspotify
-exec /usr/bin/librespot  --name "$DEVICE_NAME" --backend alsa --bitrate 320 --cache /var/cache/raspotify --initial-volume=$SYSTEM_OUTPUT_VOLUME
+exec /usr/local/bin/librespot  --name "$DEVICE_NAME" --backend alsa --bitrate 160 --cache /var/cache/librespot --initial-volume=$SYSTEM_OUTPUT_VOLUME --enable-volume-normalisation --normalisation-pregain 2

@@ -1,14 +1,14 @@
-FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine
+FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine:3.11
 
 ENV INITSYSTEM on
 
 RUN install_packages \
-  snapcast \
+  snapcast-client \
   avahi \
   dbus
 
 COPY start.sh /usr/src/
-WORKDIR /usr/src/
+
 ENV DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
 
-CMD [ "/bin/bash", "start.sh" ]
+CMD [ "/bin/bash", "/usr/src/start.sh" ]
