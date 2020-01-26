@@ -3,19 +3,16 @@ FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine:3.11
 ENV INITSYSTEM on
 
 RUN install_packages snapcast-server avahi avahi-tools dbus curl cargo alsa-lib-dev protobuf-dev \
- && cd /root \
- && curl -LO https://github.com/librespot-org/librespot/archive/master.zip \
- && unzip master.zip \
- && cd librespot-master \
- && cargo build --jobs $(grep -c ^processor /proc/cpuinfo) --release --features alsa-backend --no-default-features \
- && mv target/release/librespot /usr/local/bin \
- && cd / \
- && apk --purge del curl cargo protobuf-dev \
- && apk add llvm-libunwind \
- && rm -rf /etc/ssl /var/cache/apk/* /lib/apk/db/* /root/master.zip /root/librespot-master /root/.cargo 
- #&& apk add --update \
- #   --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
- #   shairport-sync
+    && cd /root \
+    && curl -LO https://github.com/librespot-org/librespot/archive/master.zip \
+    && unzip master.zip \
+    && cd librespot-master \
+    && cargo build --jobs $(grep -c ^processor /proc/cpuinfo) --release --features alsa-backend --no-default-features \
+    && mv target/release/librespot /usr/local/bin \
+    && cd / \
+    && apk --purge del curl cargo protobuf-dev \
+    && apk add llvm-libunwind \
+    && rm -rf /etc/ssl /var/cache/apk/* /lib/apk/db/* /root/master.zip /root/librespot-master /root/.cargo 
 
 COPY snapserver.conf /etc/
 COPY start.sh /usr/src/

@@ -1,4 +1,4 @@
-version: '2'
+version: "2"
 services:
   airplay:
     build: ./airplay
@@ -12,7 +12,7 @@ services:
     restart: always
     network_mode: host
     privileged: true
-    labels: 
+    labels:
       io.balena.features.dbus: 1
     volumes:
       - spotifycache:/var/cache/librespot
@@ -21,14 +21,14 @@ services:
     restart: always
     network_mode: host
     privileged: true
-    labels: 
+    labels:
       io.balena.features.dbus: 1
 #  snapserver:
 #    build: ./snapserver
 #    restart: always
 #    network_mode: host
 #    privileged: true
-#    labels: 
+#    labels:
 #      io.balena.features.dbus: 1
 volumes:
   spotifycache:
