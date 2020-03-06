@@ -2,10 +2,24 @@ FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine:3.11
 
 ENV INITSYSTEM on
 
-RUN install_packages \
-  snapcast-client \
-  avahi \
-  dbus
+#RUN install_packages \
+#  snapcast-client \
+#  avahi \
+#  dbus
+
+RUN apk -U add git bash build-base asio-dev avahi-dev flac-dev libvorbis-dev opus-dev alsa-lib-dev boost-dev expat-dev libstdc++ soxr-dev shadow \
+ && cd /root \
+ && git clone https://github.com/badaix/snapcast.git \
+ && cd snapcast/externals \
+ && git submodule update --init --recursive \
+ && cd .. \
+ && make \
+ && make installclient \
+ #&& cp server/snapserver client/snapclient /usr/local/bin \
+ && cd / \
+ && apk --purge del git build-base asio-dev avahi-dev flac-dev libvorbis-dev opus-dev alsa-lib-dev boost-dev expat-dev libstdc++ soxr-dev shadow \
+ && apk add avahi-libs flac libvorbis alsa-lib opus soxr \
+ && rm -rf /etc/ssl /var/cache/apk/* /lib/apk/db/* /root/snapcast
 
 COPY start.sh /usr/src/
 
